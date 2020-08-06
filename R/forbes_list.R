@@ -170,7 +170,7 @@ get_forbes_tables <-
   }
 
 get_year_forbes_list_data_safe <-
-  purrr::possibly(NULL, get_year_forbes_list_data)
+  purrr::possibly(get_year_forbes_list_data,NULL)
 
 get_year_forbes_list_data <-
   function(list = "NBA Valuations", year = 2016) {
@@ -622,7 +622,7 @@ get_year_forbes_list_data <-
   }
 
 parse_forbes_bio_url_safe <-
-  failwith(NULL, parse_forbes_bio_url)
+  failwith(parse_forbes_bio_url,NULL)
 
 parse_forbes_bio_url <-
   function(url = "http://www.forbes.com/profile/floyd-mayweather/",
