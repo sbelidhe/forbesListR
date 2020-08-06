@@ -229,7 +229,7 @@ get_year_forbes_list_data <-
       purrr::map(json_data, class) %>%
       unlist() %>%
       data.frame(class = .) %>%
-      tibble::as_tibble %>%
+      as_tibble %>%
       mutate(table = rownames(.),
              column = 1:n())
 
