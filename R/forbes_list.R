@@ -200,7 +200,7 @@ get_year_forbes_list_data <-
       paste0(year, '&uri=', uri, '&type=', type) %>%
       unique()
 
-    if (url %>% fromJSON() %>% as_tibble %>% nrow == 0) {
+    if (url %>% fromJSON() %>% as_data_frame %>% nrow == 0) {
       stop("Sorry Forbes ", list, " for ", year, " has no data")
     }
 
@@ -229,7 +229,7 @@ get_year_forbes_list_data <-
       purrr::map(json_data, class) %>%
       unlist() %>%
       data.frame(class = .) %>%
-      as_tibble %>%
+      as_data_frame %>%
       mutate(table = rownames(.),
              column = 1:n())
 
