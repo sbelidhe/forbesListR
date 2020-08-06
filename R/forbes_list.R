@@ -820,7 +820,7 @@ parse_forbes_bio_url <-
 
 
 parse_forbes_bio_url_safe <-
-  failwith(parse_forbes_bio_url,otherwise = NULL)
+  purrr::possibly(parse_forbes_bio_url,otherwise = NULL)
 
 get_years_forbes_list_data <-
   function(years = 2012:2016,
