@@ -207,7 +207,7 @@ get_year_forbes_list_data <-
     json_data <-
       url %>%
       fromJSON(simplifyDataFrame = T, flatten = T) %>%
-      as_tibble()
+      as_data_frame()
 
     if(!'rank' %in% names(json_data)) {
       if('position' %in% names(json_data)) {
