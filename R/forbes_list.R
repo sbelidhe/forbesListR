@@ -243,7 +243,7 @@ get_year_forbes_list_data <-
       list_df <-
         json_data[, list_col] %>%
         mutate(id.table = 1:n()) %>%
-        unnest()
+        unnest(cols = c(owners))
       all_list_data <-
         tibble()
       for (id in list_df$id.table %>% unique) {
