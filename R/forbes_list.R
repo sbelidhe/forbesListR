@@ -619,9 +619,6 @@ get_year_forbes_list_data <-
     return(json_data)
   }
 
-get_year_forbes_list_data_safe <-
-  failwith(NULL, get_year_forbes_list_data)
-
 parse_forbes_bio_url <-
   function(url = "http://www.forbes.com/profile/floyd-mayweather/",
            return_message = T) {
@@ -832,9 +829,6 @@ get_years_forbes_list_data <-
 
     return(all_data)
   }
-
-parse_forbes_bio_url_safe <-
-  failwith(NULL, parse_forbes_bio_url)
 
 get_year_list_forbes_bio_data <-
   function(year = 2016,
