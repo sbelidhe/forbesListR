@@ -267,8 +267,9 @@ get_year_forbes_list_data <-
             extract2(1)
         }
 
-        all_list_data %<>% bind_rows(tibble(id.table = id,
-                                                name = names))
+        all_list_data %<>% mutate(id= as.character(id)) 
+        bind_rows(tibble(id.table = id,
+                        name = names))
       }
       names(all_list_data)[2] <-
         column_class_df %>%
