@@ -15,7 +15,7 @@ get_forbes_tables <-
   function() {
     load_needed_packages('dplyr')
     forbes_tables <-
-      data_frame(
+      tibble(
         name = c(
           'Top VCs',
           'Athletes',
@@ -200,14 +200,14 @@ get_year_forbes_list_data <-
       paste0(year, '&uri=', uri, '&type=', type) %>%
       unique()
 
-    if (url %>% fromJSON() %>% as_data_frame %>% nrow == 0) {
+    if (url %>% fromJSON() %>% as_tibble %>% nrow == 0) {
       stop("Sorry Forbes ", list, " for ", year, " has no data")
     }
 
     json_data <-
       url %>%
       fromJSON(simplifyDataFrame = T, flatten = T) %>%
-      as_data_frame()
+      as_tibble()
 
     if(!'rank' %in% names(json_data)) {
       if('position' %in% names(json_data)) {
@@ -229,7 +229,7 @@ get_year_forbes_list_data <-
       purrr::map(json_data, class) %>%
       unlist() %>%
       data.frame(class = .) %>%
-      tbl_df %>%
+      tibble::as_tibble %>%
       mutate(table = rownames(.),
              column = 1:n())
 
@@ -245,7 +245,7 @@ get_year_forbes_list_data <-
         mutate(id.table = 1:n()) %>%
         unnest()
       all_list_data <-
-        data_frame()
+        tibble()
       for (id in list_df$id.table %>% unique) {
         if (list_df %>%
             dplyr::filter(id.table == id) %>%
@@ -267,7 +267,7 @@ get_year_forbes_list_data <-
             extract2(1)
         }
 
-        all_list_data %<>% bind_rows(data_frame(id.table = id,
+        all_list_data %<>% bind_rows(tibble(id.table = id,
                                                 name = names))
       }
       names(all_list_data)[2] <-
@@ -631,7 +631,7 @@ parse_forbes_bio_url <-
       load_needed_packages()
 
     names_df <-
-      data_frame(
+      tibble(
         name = c(
           'age',
           'wealth.source',
@@ -728,7 +728,7 @@ parse_forbes_bio_url <-
       .[1]
 
     bio_df <-
-      data_frame(item = items, value = values) %>%
+      tibble(item = items, value = values) %>%
       left_join(names_df) %>%
       suppressMessages() %>%
       dplyr::filter(!name %>% is.na) %>%
